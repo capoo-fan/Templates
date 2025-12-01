@@ -1,6 +1,10 @@
 #import "./lib.typ": *
 
-
+#show: title.with(
+  title: "正文标题",
+  date: "2025-01-01",
+  name: "潜伏", 
+)
 
 // 正文内容
 = 第一章

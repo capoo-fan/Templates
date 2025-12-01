@@ -7,6 +7,108 @@
 #let text-font = "Times New Roman"
 #let code-font = "DejaVu Sans Mono"
 
+// 主题色
+#let primary-color = rgb("#1a365d")
+#let accent-color = rgb("#3182ce")
+
+#let title(
+  title: "文章标题",
+  date: "2025-01-01",
+  name: "作者姓名",
+  avatar: "figures/cover.jpg",
+  body,
+) = {
+  // 顶部装饰条
+  place(top + left, dx: -2.5cm, dy: -2.5cm)[
+    #rect(width: 100% + 5cm, height: 6pt, fill: accent-color)
+  ]
+  
+  v(1cm)
+  
+  // 标题区域
+  align(center)[
+    #box(
+      width: 100%,
+      inset: (y: 16pt),
+    )[
+      #text(
+        size: 28pt, 
+        font: (text-font, heiti), 
+        fill: primary-color,
+        weight: "bold",
+        tracking: 2pt,
+      )[#title]
+    ]
+  ]
+  
+  v(8pt)
+  
+  // 装饰分隔线
+  align(center)[
+    #box(width: 50%)[
+      #grid(
+        columns: (1fr, auto, 1fr),
+        align: horizon,
+        line(length: 100%, stroke: 1pt + luma(200)),
+        box(inset: (x: 12pt))[
+          #text(fill: accent-color, size: 12pt)[◆]
+        ],
+        line(length: 100%, stroke: 1pt + luma(200)),
+      )
+    ]
+  ]
+  
+  v(16pt)
+  
+  // 作者信息
+  align(center)[
+    #box(
+      fill: rgb("#f7fafc"),
+      radius: 8pt,
+      inset: 16pt,
+      stroke: 1pt + luma(230),
+    )[
+      #grid(
+        columns: (auto, auto, auto),
+        gutter: 24pt,
+        align: horizon,
+        
+        // 头像
+        box(
+          clip: true,
+          radius: 6pt,
+          stroke: 2pt + accent-color,
+        )[
+          #image(avatar, width: 50pt, height: 50pt, fit: "cover")
+        ],
+        
+        // 作者
+        box(inset: (x: 8pt))[
+          #text(size: 10pt, fill: luma(120))[作者]
+          #v(2pt)
+          #text(size: 14pt, font: (text-font, songti), fill: primary-color, weight: "medium")[#name]
+        ],
+        
+        // 日期
+        box(inset: (x: 8pt))[
+          #text(size: 10pt, fill: luma(120))[日期]
+          #v(2pt)
+          #text(size: 14pt, fill: primary-color)[#date]
+        ],
+      )
+    ]
+  ]
+  
+  v(24pt)
+  
+  // 底部装饰线
+  line(length: 100%, stroke: 0.5pt + luma(200))
+  
+  v(16pt)
+  
+  body
+}
+
 // 设置页面
 #set page(
   paper: "a4",
